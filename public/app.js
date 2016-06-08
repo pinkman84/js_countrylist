@@ -4,7 +4,19 @@ console.log(nations);
 window.onload = function(){
     style();
     setup();
+    var center = {lat: nations.latlng[0], lng: nations.latlng[1]}
+    console.log(center);
+    var map = new Map(center, 4);
+
+   
+
+    map.addInfoWindow(center, '<p>' + "Country: " + nations.name + '</p>' +
+                              "<p>Population: " + nations.population + '</p>' +
+                              "<p>Capital: " + nations.capital + '</p>')
     }
+
+
+
 
     var style = function(){
       var body = document.querySelector('body')
@@ -30,7 +42,7 @@ window.onload = function(){
     var setup = function(){
               var ul = document.getElementById('country-list')
               p = document.createElement('p')
-              p.innerText = "Country: " + nations.name + "\n" +
+              p.innerText = "The last Country searched was: \n " + nations.name + "\n" +
                             "Population: " + nations.population + "\n" +
                             "Capital: " + nations.capital
               ul.appendChild(p)
@@ -62,6 +74,12 @@ var countrySelector = function(){
           
 
              localStorage.setItem('nations', JSON.stringify(country))
+             var center = {lat: country.latlng[0], lng: country.latlng[1]}
+             console.log(center);
+             var map = new Map(center, 4);
+             map.addInfoWindow(center, '<p>' + "Country: " + country.name + '</p>' +
+                              "<p>Population: " + country.population + '</p>' +
+                              "<p>Capital: " + country.capital + '</p>')
         }      
         }
 
